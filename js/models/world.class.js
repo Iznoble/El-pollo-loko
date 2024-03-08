@@ -5,6 +5,7 @@ class World {
     ctx;
     keyboard;
     camara_x = 0;
+    statusBar = new statusBar();
 
 
     constructor(canvas, keyboard) {
@@ -25,7 +26,6 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    console.log('Energie berägt:', this.character.energy);
                 }
             })
         }, 200);
@@ -39,6 +39,7 @@ class World {
         this.ctx.translate(this.camara_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addToMap(this.statusBar);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
