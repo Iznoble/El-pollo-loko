@@ -1,8 +1,8 @@
 class Character extends MovableObject {
 
     height = 250;
-    y = 80;
-    speed = 10;
+    y = 175;
+    speed = 7;
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -94,20 +94,17 @@ class Character extends MovableObject {
                 this.currentImage = 6;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
-            else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMP); // hihest -39 lowest 151
-                this.y < 150 
-                this.currentImage = 2;
-                this.y < 130
-                this.currentImage = 3;
-            }
-            else {
+            } else if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMP);
+                this.currentImage = 4;
+            } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
+                } else {
+                    this.playAnimation(this.IMAGES_IDLE);
                 }
             }
-        }, 50);
+        }, 150);
 
     }
 }

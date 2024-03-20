@@ -1,8 +1,8 @@
 class MovableObject extends drawableObject {
-    speed = 0.15;
+    speed = 0.60;
     otherDiretion = false;
     speedY = 0;
-    acceleration = 1;
+    acceleration = 1.5;
     energy = 100;
     lastHit = 0;
 
@@ -17,7 +17,7 @@ class MovableObject extends drawableObject {
     }
 
     isAboveGround() {
-        return this.y < 160;
+        return this.y < 175;
     }
 
 
