@@ -62,7 +62,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMP);
         this.applyGravity();
         this.animate();
-
     }
 
 
@@ -93,6 +92,8 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.currentImage = 6;
             } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            }  else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);

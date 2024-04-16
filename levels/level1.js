@@ -1,9 +1,6 @@
 const level1 = new Level(
     [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Endboss(),
+        //new Chicken(),
     ],
 
     [
@@ -47,8 +44,9 @@ const level1 = new Level(
     ],
 
     [
-        new Collectable(),
-        new Collectable(),
-        new Collectable(),
+        //new coins(150, 400),
+        //new coins(150, 600),
+        new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 450),
+        new bottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 600),
     ]
 );

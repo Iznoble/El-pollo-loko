@@ -1,6 +1,6 @@
-class Coinstatus extends drawableObject {
+class coinStatus extends MovableObject {
 
-    IMAGES_COINS_STATUS = [
+    IMAGESCOINS = [
         "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png",
         "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png",
         "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png",
@@ -11,34 +11,37 @@ class Coinstatus extends drawableObject {
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_COINS_STATUS);
+        this.loadImages(this.IMAGESCOINS);
         this.x = 40;
-        this.y = 40;
+        this.y = 42;
         this.width = 200;
         this.height = 60;
-        this.setPercentage(0);
+        this.setPercentage(this.coinPrecent);
     }
 
     setPercentage(percentage) {
         this.percentage = percentage;
-        let path = this.IMAGES_COINS_STATUS[this.resolveImageIndex()];
+        let path = this.IMAGESCOINS[this.resolveImageIndex()];
         this.img = this.ImageCache[path];
     }
 
 
     resolveImageIndex() {
-        if (this.percentage == 20) {
+        if (this.percentage == 0) {
+            return 0;
+        } else if (this.percentage == 20) {
             return 1;
-        } else if (this.percentage > 40) {
+        }else if (this.percentage == 40) {
             return 2;
-        }else if (this.percentage > 60) {
+        }else if (this.percentage == 60) {
             return 3;
-        }else if (this.percentage > 80) {
+        }else if (this.percentage == 80) {
             return 4;
-        }else if (this.percentage > 100) {
+        }else if (this.percentage == 100) {
             return 5;
-        }else  {
+        }else {
             return 0;
         }
     }
+
 }

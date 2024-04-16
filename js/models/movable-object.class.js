@@ -5,6 +5,9 @@ class MovableObject extends drawableObject {
     acceleration = 1.5;
     energy = 100;
     lastHit = 0;
+    coinPrecent = 0;
+    bottlePrecent = 0;
+
 
     applyGravity() {
 
@@ -16,9 +19,28 @@ class MovableObject extends drawableObject {
         }, 1000 / 25);
     }
 
+
+
     isAboveGround() {
         return this.y < 175;
     }
+
+
+    getItem(item) {
+        if (item = coins) {
+            this.coinPrecent += 20;
+            if (this.coinPrecent > 100) {
+                this.coinPrecent = 100;
+            }
+        } else if (item = bottle) {
+            this.bottlePrecent += 20;
+            if (this.bottlePrecent > 100) {
+                this.bottlePrecent = 100;
+            }
+        }
+    }
+
+
 
 
     isColliding(mo) {
@@ -36,6 +58,7 @@ class MovableObject extends drawableObject {
             this.lastHit = new Date().getTime();
         }
     }
+
 
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
