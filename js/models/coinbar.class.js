@@ -16,7 +16,7 @@ class coinStatus extends MovableObject {
         this.y = 42;
         this.width = 200;
         this.height = 60;
-        this.setPercentage(this.coinPrecent);
+        this.setPercentage(0);
     }
 
     setPercentage(percentage) {

@@ -40,9 +40,7 @@ class World {
         setInterval(() => {
             this.level.collectableItems.forEach((item) => {
                 if (this.character.isColliding(item)) {
-                    this.character.getItem(item);
-                    this.coinBar.setPercentage(this.character.coinPrecent);
-                    this.bottleBar.setPercentage(this.character.bottlePrecent);
+                    
                 }
             })
         }, 200);
