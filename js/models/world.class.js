@@ -30,9 +30,18 @@ class World {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
                     this.healthBar.setPercentage(this.character.energy);
+                } else if (this.character.jumpOnEnemies(enemy)) {
+                    this.character.jump();
+                    enemy.hit();
+                    setTimeout(() => this.test(this.level.enemies), 1500);
                 }
             })
-        }, 200);
+        }, 100); 
+    }
+
+
+    test(objectArray) {
+        objectArray.splice(objectArray.indexOf(objectArray, 1));
     }
 
 
@@ -40,10 +49,13 @@ class World {
         setInterval(() => {
             this.level.collectableItems.forEach((item) => {
                 if (this.character.isColliding(item)) {
-                    
+                    this.character.getItem(item)
+                    this.coinBar.setPercentage(this.character.coinPrecent);
+                    this.bottleBar.setPercentage(this.character.bottlePrecent);
+                    this.level.collectableItems.splice(this.level.collectableItems.indexOf(item), 1);
                 }
             })
-        }, 200);
+        });
     }
 
 

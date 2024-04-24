@@ -3,6 +3,14 @@ class Character extends MovableObject {
     height = 250;
     y = 175;
     speed = 7;
+    offset = {
+        top: 120,
+        bottom: 30,
+        right: 30,
+        left: 40
+    }
+
+
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -91,21 +99,19 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.currentImage = 6;
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 100);
+
+
+        setInterval(() => {
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMP);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }  else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMP);
-                this.currentImage = 4;
-            } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                } else {
-                    this.playAnimation(this.IMAGES_IDLE);
-                }
             }
-        }, 150);
+        }, 50);
 
     }
 }
