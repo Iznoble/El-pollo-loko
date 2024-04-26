@@ -8,6 +8,7 @@ class World {
     healthBar = new healthBar();
     coinBar = new coinStatus();
     bottleBar = new bottleStatus();
+    throwableItem = [new Throwable()];
 
 
     constructor(canvas, keyboard) {
@@ -20,9 +21,13 @@ class World {
         this.collectItems();
     }
 
+
+
     setWorld() {
         this.character.world = this;
     }
+
+
 
     checkCollisions() {
         setInterval(() => {
@@ -33,15 +38,38 @@ class World {
                 } else if (this.character.jumpOnEnemies(enemy)) {
                     this.character.jump();
                     enemy.hit();
-                    setTimeout(() => this.test(this.level.enemies), 1500);
+                    this.deleteObject(this.level.enemies);
+                } else {
+                    this.throwableItem.forEach((item) => {
+                        if (item.isColliding(enemy)) {
+                            enemy.hit();
+                            this.deleteObject(this.level.enemies);
+                        }
+                    })
                 }
-            })
-        }, 100); 
+            });
+            this.checkThrow();
+        }, 100);
     }
 
 
-    test(objectArray) {
-        objectArray.splice(objectArray.indexOf(objectArray, 1));
+    deleteObject(objectArray) {
+        setTimeout(() => {
+            objectArray.splice(0, 1);
+        }, 700);
+    }
+
+
+
+    checkThrow() {
+        if (this.keyboard.F) {
+            if (this.character.bottlePrecent > 0) {
+                let bottle = new Throwable(this.character.x);
+                this.throwableItem.push(bottle);
+                this.character.bottlePrecent -= 20;
+                this.bottleBar.setPercentage(this.character.bottlePrecent);
+            }
+        }
     }
 
 
@@ -77,7 +105,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.collectableItems);
-
+        this.addObjectsToMap(this.throwableItem);
         this.ctx.translate(-this.camara_x, 0);
 
 

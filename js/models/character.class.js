@@ -1,7 +1,6 @@
 class Character extends MovableObject {
 
     height = 250;
-    y = 175;
     speed = 7;
     offset = {
         top: 120,
@@ -17,6 +16,19 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-3.png'
     ];
 
+    IMAGES_SLEPPING = [
+        "img/2_character_pepe/1_idle/long_idle/I-11.png",
+        "img/2_character_pepe/1_idle/long_idle/I-12.png",
+        "img/2_character_pepe/1_idle/long_idle/I-13.png",
+        "img/2_character_pepe/1_idle/long_idle/I-14.png",
+        "img/2_character_pepe/1_idle/long_idle/I-15.png",
+        "img/2_character_pepe/1_idle/long_idle/I-16.png",
+        "img/2_character_pepe/1_idle/long_idle/I-17.png",
+        "img/2_character_pepe/1_idle/long_idle/I-18.png",
+        "img/2_character_pepe/1_idle/long_idle/I-19.png",
+        "img/2_character_pepe/1_idle/long_idle/I-20.png"
+    ];
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -29,11 +41,11 @@ class Character extends MovableObject {
     IMAGES_JUMP = [
         'img/2_character_pepe/3_jump/J-31.png',
         'img/2_character_pepe/3_jump/J-32.png',
-        'img/2_character_pepe/3_jump/J-33.png',
-        'img/2_character_pepe/3_jump/J-34.png',
-        'img/2_character_pepe/3_jump/J-35.png',
-        'img/2_character_pepe/3_jump/J-36.png',
-        'img/2_character_pepe/3_jump/J-37.png',
+        'img/2_character_pepe/3_jump/J-33.png',// holt schwung aus
+        'img/2_character_pepe/3_jump/J-34.png',//springt hoch (jump Height)
+        'img/2_character_pepe/3_jump/J-35.png',//wenn er runter fällt (beginn)
+        'img/2_character_pepe/3_jump/J-36.png',//wenn er runter fällt (luft)
+        'img/2_character_pepe/3_jump/J-37.png',// berührt wieder den Boden
         'img/2_character_pepe/3_jump/J-38.png',
         'img/2_character_pepe/3_jump/J-39.png',
     ];
@@ -58,18 +70,20 @@ class Character extends MovableObject {
 
 
     world;
-    walking_sound = new Audio('audio/concrete-footsteps-6752.mp3')
+    walking_sound = new Audio('audio/concrete-footsteps-6752.mp3');
 
 
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_SLEPPING);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_JUMP);
         this.applyGravity();
         this.animate();
+        console.log(this.y)
     }
 
 
@@ -96,22 +110,17 @@ class Character extends MovableObject {
 
 
         setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.currentImage = 6;
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
+            } else {
+                this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 100);
-
+        }, 125);
 
         setInterval(() => {
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
             }
-        }, 50);
-
+        }, 155);
     }
 }

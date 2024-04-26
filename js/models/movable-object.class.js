@@ -7,6 +7,7 @@ class MovableObject extends drawableObject {
     lastHit = 0;
     coinPrecent = 0;
     bottlePrecent = 0;
+    animationCompleted = false;
     offset = {
         top: 0,
         bottom: 0,
@@ -31,7 +32,11 @@ class MovableObject extends drawableObject {
 
 
     isAboveGround() {
-        return this.y < 175;
+        if (this instanceof Throwable) {
+            return true;
+        } else {
+            return this.y < 175;
+        }
     }
 
 
@@ -54,15 +59,15 @@ class MovableObject extends drawableObject {
     }
 
 
-    jumpOnEnemies(enemy) { //Chicken höhe ist 80
+    jumpOnEnemies(enemy) { 
         return this.x + this.width - this.offset.right > enemy.x + enemy.offset.left &&
             this.y + this.height > enemy.y &&
             this.x + this.offset.left < enemy.x + enemy.width - enemy.offset.right &&
             this.y < enemy.y + enemy.height;
-            
+
     }
 
-    
+
 
     hit() {
         this.energy -= 5;
@@ -91,6 +96,22 @@ class MovableObject extends drawableObject {
         let path = images[i];
         this.img = this.ImageCache[path];
         this.currentImage++;
+    }
+
+
+    playOnce(images) {
+        if (this.animationCompleted) {
+            return;
+        }
+
+        this.animationCompleted = true;
+
+        for (let i = 0; i < images.length; i++) {
+            const path = images[i];
+            setTimeout(() => {
+                this.img = this.ImageCache[path];
+            }, 50 * i);
+        }
     }
 
 
