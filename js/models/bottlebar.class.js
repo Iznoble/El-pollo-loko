@@ -38,7 +38,7 @@ class bottleStatus extends MovableObject {
             return 3;
         }else if (this.percentage == 80) {
             return 4;
-        }else if (this.percentage == 100) {
+        }else if (this.percentage >= 100) {
             return 5;
         }else {
             return 0;

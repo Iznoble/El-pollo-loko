@@ -7,7 +7,8 @@ class Character extends MovableObject {
         bottom: 30,
         right: 30,
         left: 40
-    }
+    };
+    endBoss = new Endboss();
 
 
     IMAGES_IDLE = [
@@ -71,6 +72,9 @@ class Character extends MovableObject {
 
     world;
     walking_sound = new Audio('audio/concrete-footsteps-6752.mp3');
+    setCharacter() {
+        this.endBoss.character = this;
+    }
 
 
     constructor() {
@@ -102,6 +106,7 @@ class Character extends MovableObject {
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.currentImage = 0;
                 this.jump();
             }
 
@@ -110,17 +115,18 @@ class Character extends MovableObject {
 
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            if (this.isAboveGround()) {
+                if (this.speedY < 0 && this.currentImage > 4) {
+                    this.currentImage = 4;
+                }
+                this.playAnimation(this.IMAGES_JUMP);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 125);
+        }, 100);
 
-        setInterval(() => {
-            if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMP);
-            }
-        }, 155);
+
     }
 }
