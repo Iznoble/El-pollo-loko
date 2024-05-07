@@ -9,6 +9,7 @@ class World {
   coinBar = new coinStatus();
   bottleBar = new bottleStatus();
   bossBar = new bossHealth();
+  boss = new Endboss();
   throwableItem = [new Throwable()];
 
 
@@ -26,6 +27,7 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.boss.character = this;
   }
 
 
@@ -42,14 +44,16 @@ class World {
           this.deleteEnemy(enemy);
         } else {
           let itemCollision = false;
-          this.throwableItem.forEach((item) => {
-            if (item.isColliding(enemy)) {
-              itemCollision = true;
-              enemy.hit();
-              this.bossBar.setPercentage(enemy.energy);
-              this.throwableItem.splice(item, 1);
-              console.log(enemy.energy);
-            }
+          this.throwableItem.forEach((item) => { 
+            if (item.isColliding(enemy)) { 
+              itemCollision = true; 
+              enemy.hit(); 
+              if (enemy instanceof Endboss) {
+                this.bossBar.setPercentage(enemy.energy); 
+              }
+              this.throwableItem.splice(item, 1); 
+              console.log(enemy.energy); 
+            } 
           });
 
           if (enemy.energy < 5 && itemCollision) {
@@ -61,6 +65,7 @@ class World {
       this.checkThrow();
     }, 100);
   }
+  
 
   deleteEnemy(enemy) {
     setTimeout(() => {
@@ -68,7 +73,7 @@ class World {
       if (index > -1) {
         this.level.enemies.splice(index, 1);
       }
-    }, 500);
+    }, 1500);
   }
 
 
@@ -142,7 +147,7 @@ class World {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+    //mo.drawFrame(this.ctx);
 
     if (mo.otherDiretion) {
       this.flipImageBack(mo);

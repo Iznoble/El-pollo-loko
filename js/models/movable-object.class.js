@@ -59,18 +59,16 @@ class MovableObject extends drawableObject {
     }
 
 
-    jumpOnEnemies(enemy) { 
+    jumpOnEnemies(enemy) {
         return this.x + this.width - this.offset.right > enemy.x + enemy.offset.left &&
             this.y + this.height > enemy.y &&
             this.x + this.offset.left < enemy.x + enemy.width - enemy.offset.right &&
             this.y < enemy.y + enemy.height;
-
     }
 
 
-
     hit() {
-        this.energy -= 10;
+        this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -79,17 +77,17 @@ class MovableObject extends drawableObject {
     }
 
 
-
-
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
+
     isDead() {
         return this.energy == 0;
     }
+
 
     playAnimation(images) {
         let i = this.currentImage % images.length;

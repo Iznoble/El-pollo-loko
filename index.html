@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,11 +24,24 @@
     <script src="js/models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
+    <script src="/js/script.js"></script>
     <title>Document</title>
 </head>
+
 <body onload="init()">
     <h1>El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720" height="480"></canvas>
+    <div>
+        <div>
+            <button onclick="startGame()" class="start-btn" id="startBtn">Start</button>
+            <button>No Sound</button>
+            <button>Full Screen</button>
+            <button>Controlls</button>
+        </div>
+        <div>
+            <canvas id="canvas" width="720" height="480"></canvas>
+        </div>
+    </div>
 </body>
+
 </html>

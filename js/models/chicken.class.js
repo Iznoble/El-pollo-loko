@@ -5,9 +5,9 @@ class Chicken extends MovableObject {
     width = 80;
     offset = {
         top: 20,
-        bottom: 20,
-        right: 20,
-        left: 20
+        bottom: 10,
+        right: 10,
+        left: 10
     }
 
 
@@ -24,7 +24,7 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
         this.x = 700 + Math.random() * 500;
-        this.speed = 0  //Math.random() * 0.5;
+        this.speed = 0 + Math.random() * 0.5;
         this.energy = 5;
         this.animate();
     }
@@ -34,7 +34,7 @@ class Chicken extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.moveLeft();
+            //this.moveLeft();
             this.otherDiretion = false;
         }, 1000 / 60);
 

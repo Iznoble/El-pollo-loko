@@ -2,9 +2,36 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('img/5_background/first_half_background.png');
+    background-position: center;
+}
+
+.d-none {
+    display: none;
 }
 
 canvas {
     background-color: black;
-    
+}
+
+.start-img {
+    height: 480px;
+    width: 720px;
+    position: absolute;
+}
+
+.start-btn {
+    position: absolute;
+    top: 70vh;
+    left: 38vw;
+    z-index: 1;
+    width: 200px;
+    height: 99px;
+    border-radius: 50%;
+    background-color: rgb(255, 158, 0);
+    font-size: 30px;
+}
+
+.start-btn:hover {
+    cursor: pointer;
 }

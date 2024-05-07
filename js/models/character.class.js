@@ -4,8 +4,8 @@ class Character extends MovableObject {
     speed = 7;
     offset = {
         top: 120,
-        bottom: 30,
-        right: 30,
+        bottom: 10,
+        right: 20,
         left: 40
     };
     endBoss = new Endboss();
@@ -72,9 +72,10 @@ class Character extends MovableObject {
 
     world;
     walking_sound = new Audio('audio/concrete-footsteps-6752.mp3');
-    setCharacter() {
-        this.endBoss.character = this;
-    }
+    IDLE_THRESHOLD = 5000; // 5 Sekunden in Millisekunden
+    idleTime = 0;
+    lastMoveTime = new Date().getTime();
+    
 
 
     constructor() {
@@ -87,8 +88,9 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMP);
         this.applyGravity();
         this.animate();
-        console.log(this.y)
     }
+
+   
 
 
     animate() {
@@ -97,6 +99,7 @@ class Character extends MovableObject {
             this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
+                //console.log(this.x);
                 //this.walking_sound.play();
             }
 
@@ -120,12 +123,28 @@ class Character extends MovableObject {
                     this.currentImage = 4;
                 }
                 this.playAnimation(this.IMAGES_JUMP);
+                this.idleTime = 0;
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
+                this.idleTime = 0;
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
             } else {
-                this.playAnimation(this.IMAGES_IDLE);
+                const currentTime = new Date().getTime();
+                const timeSinceLastMove = currentTime - this.lastMoveTime;
+
+                if (timeSinceLastMove >= this.IDLE_THRESHOLD) {
+                    this.idleTime += 125;
+                    if (this.idleTime >= this.IDLE_THRESHOLD) {
+                        this.playAnimation(this.IMAGES_SLEPPING);
+                    } else {
+                        this.playAnimation(this.IMAGES_IDLE);
+                    }
+                } else {
+                    this.playAnimation(this.IMAGES_IDLE);
+                }
             }
-        }, 100);
+        }, 125);
 
 
     }
