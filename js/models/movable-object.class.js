@@ -8,13 +8,13 @@ class MovableObject extends drawableObject {
     coinPrecent = 0;
     bottlePrecent = 0;
     animationCompleted = false;
+    audio = new Sounds();
     offset = {
         top: 0,
         bottom: 0,
         right: 0,
         left: 0
     };
-
 
 
     applyGravity() {
@@ -28,7 +28,6 @@ class MovableObject extends drawableObject {
             }
         }, 1000 / 30);
     }
-
 
 
     isAboveGround() {
@@ -47,8 +46,6 @@ class MovableObject extends drawableObject {
             this.bottlePrecent += 20;
         }
     }
-
-
 
 
     isColliding(mo) {
@@ -113,16 +110,17 @@ class MovableObject extends drawableObject {
     }
 
 
-
     moveRight() {
         this.x += this.speed;
         this.otherDiretion = false;
     }
 
+
     moveLeft() {
         this.x -= this.speed;
         this.otherDiretion = true;
     }
+
 
     jump() {
         this.speedY = 20;

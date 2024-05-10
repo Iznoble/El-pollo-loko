@@ -1,11 +1,24 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let audio = new Sounds();
+
 
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+}
+
+function startGame() {
+    let level = initLevel();
+
+    let overlay = document.getElementById('startImg');
+    let startButton = document.getElementById('startBtn');
+
+    overlay.classList.add('d-none');
+    startButton.classList.add('d-none');
+    audio.level_audio.level1.play();
+    world = new World(canvas, keyboard, level);
 }
 
 

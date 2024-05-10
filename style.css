@@ -1,9 +1,23 @@
+@font-face {
+    font-family: 'zabras';
+    src: url('/fonts/zabars.ttf') format('truetype');
+}
+
+
 body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url('img/5_background/first_half_background.png');
+    background-image: url('img/5_background/second_half_background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
 }
 
 .d-none {
@@ -12,6 +26,19 @@ body {
 
 canvas {
     background-color: black;
+    display: block;
+}
+
+#fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 72px;
 }
 
 .start-img {
@@ -20,18 +47,53 @@ canvas {
     position: absolute;
 }
 
-.start-btn {
+.startImgFullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.test {
     position: absolute;
-    top: 70vh;
-    left: 38vw;
-    z-index: 1;
-    width: 200px;
-    height: 99px;
-    border-radius: 50%;
-    background-color: rgb(255, 158, 0);
-    font-size: 30px;
+    display: flex;
+    align-items: flex-start;
+    width: 720px;
+    justify-content: flex-end;
+}
+
+.start-btn {
+    font-size: 80px;
+    margin: 0;
+    margin-right: 200px;
+    color: rgb(191,0,0);
 }
 
 .start-btn:hover {
     cursor: pointer;
+    color: rgb(8,143,66);
+}
+
+.screen-btns {
+    height: 30px;
+    margin-top: 8px;
+    margin-right: 16px;
+}
+
+.screen-btns:hover {
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
 }

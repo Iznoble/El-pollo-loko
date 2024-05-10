@@ -15,11 +15,11 @@ class bossHealth extends drawableObject {
         super().loadImage('img/7_statusbars/2_statusbar_endboss/blue/blue100.png');
         this.loadImages(this.IMAGES);
         this.x = 500;
-        this.y = 10;
+        this.y = 30;
         this.width = 200;
         this.height = 60;
         this.otherDiretion = true;
-        this.setPercentage(100);
+        this.setPercentage(25);
     }
 
 
@@ -31,15 +31,15 @@ class bossHealth extends drawableObject {
 
 
     resolveImageIndex() {
-        if (this.percentage == 100) {
+        if (this.percentage == 25) {
             return 5;
-        } else if (this.percentage > 70) {
+        } else if (this.percentage > 20) {
             return 4;
-        }else if (this.percentage > 50) {
+        }else if (this.percentage > 15) {
             return 3;
-        }else if (this.percentage > 30) {
-            return 2;
         }else if (this.percentage > 10) {
+            return 2;
+        }else if (this.percentage > 5) {
             return 1;
         }else  {
             return 0;

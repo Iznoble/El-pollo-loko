@@ -18,7 +18,7 @@ class drawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-
+    //Can be removed after finish
     drawFrame(ctx) {
 
         if (this instanceof Character || this instanceof Chicken || this instanceof coins || this instanceof Throwable || this instanceof Endboss) {

@@ -8,8 +8,7 @@ class Endboss extends MovableObject {
         bottom: 40,
         right: 20,
         left: 20
-    }
-
+    };
 
     IMAGES_INTRO = [
         "img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -41,8 +40,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
-    spawnBoss = false;
-    character;
+
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -50,8 +48,8 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.energy = 40;
-        this.x = 1000;
+        this.energy = 0;
+        this.x = 4200;
         this.startIntro();
     }
 
@@ -60,9 +58,8 @@ class Endboss extends MovableObject {
     startIntro() {
         let i = 0;
         let introFinished = false;
-
         const introInterval = setInterval(() => {
-            if (this.character.x > 690 && !introFinished) {
+            if (this.x < 4000 && !introFinished) {
                 this.playAnimation(this.IMAGES_INTRO);
                 if (i >= this.IMAGES_INTRO.length - 1) {
                     introFinished = true;
@@ -72,25 +69,25 @@ class Endboss extends MovableObject {
                 clearInterval(introInterval); // Stoppe das Intro-Interval, um sicherzustellen, dass es nur einmal abgespielt wird
                 this.startWalking();
             }
-
             i++;
         }, 1000);
     }
+
 
     startWalking() {
 
         setInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.audio.endboss_audio.bossHurt.play();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.currentImage = 2;
             } else {
-                //this.moveLeft();
-                //this.otherDiretion = false;
+                this.moveLeft();
+                this.otherDiretion = false;
                 this.playAnimation(this.IMAGES_WALKING);
             }
-
         }, 200);
     }
 }

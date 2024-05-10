@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  level = level1;
+  audio = new Sounds();
   canvas;
   ctx;
   keyboard;
@@ -13,10 +13,11 @@ class World {
   throwableItem = [new Throwable()];
 
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, level) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.level = level;
     this.draw();
     this.setWorld();
     this.checkCollisions();
@@ -24,12 +25,9 @@ class World {
   }
 
 
-
   setWorld() {
     this.character.world = this;
-    this.boss.character = this;
   }
-
 
 
   checkCollisions() {
@@ -43,29 +41,13 @@ class World {
           enemy.hit();
           this.deleteEnemy(enemy);
         } else {
-          let itemCollision = false;
-          this.throwableItem.forEach((item) => { 
-            if (item.isColliding(enemy)) { 
-              itemCollision = true; 
-              enemy.hit(); 
-              if (enemy instanceof Endboss) {
-                this.bossBar.setPercentage(enemy.energy); 
-              }
-              this.throwableItem.splice(item, 1); 
-              console.log(enemy.energy); 
-            } 
-          });
-
-          if (enemy.energy < 5 && itemCollision) {
-            this.deleteEnemy(enemy);
-          }
+          this.checkItemCollison(enemy);
         }
       });
-
       this.checkThrow();
     }, 100);
   }
-  
+
 
   deleteEnemy(enemy) {
     setTimeout(() => {
@@ -77,11 +59,31 @@ class World {
   }
 
 
+  checkItemCollison(enemy) {
+    let itemCollision = false;
+    this.throwableItem.forEach((item) => {
+      if (item.isColliding(enemy)) {
+        itemCollision = true;
+        enemy.hit();
+        if (enemy instanceof Endboss) {
+          this.bossBar.setPercentage(enemy.energy);
+        }
+        this.throwableItem.splice(item, 1);
+      }
+    });
+
+    if (enemy.energy < 5 && itemCollision) {
+      this.deleteEnemy(enemy);
+    }
+  }
+
+
   checkThrow() {
     if (this.keyboard.F) {
       if (this.character.bottlePrecent > 0) {
-        let bottle = new Throwable(this.character.x);
+        let bottle = new Throwable(this.character.x, this.character.y, this);
         this.throwableItem.push(bottle);
+        this.audio.character_audio.throw.play();
         this.character.bottlePrecent -= 20;
         this.bottleBar.setPercentage(this.character.bottlePrecent);
       }
@@ -92,18 +94,28 @@ class World {
   collectItems() {
     setInterval(() => {
       this.level.collectableItems.forEach((item) => {
-        if (this.character.isColliding(item)) {
-          this.character.getItem(item)
-          this.coinBar.setPercentage(this.character.coinPrecent);
-          if (this.character.coinPrecent >= 100) {
-            this.character.bottlePrecent += 20;
-            this.character.coinPrecent = 0;
-          }
-          this.bottleBar.setPercentage(this.character.bottlePrecent);
-          this.level.collectableItems.splice(this.level.collectableItems.indexOf(item), 1);
-        }
+        this.getSoundAndPrecent(item);
       })
     });
+  }
+
+
+  getSoundAndPrecent(item) {
+    if (this.character.isColliding(item)) {
+      this.character.getItem(item);
+      if (item instanceof bottle) {
+        this.audio.level_audio.collectBottle.play();
+      } else if (item instanceof coins) {
+        this.audio.level_audio.collectCoin.play();
+      }
+      this.coinBar.setPercentage(this.character.coinPrecent);
+      if (this.character.coinPrecent >= 100) {
+        this.character.bottlePrecent += 20;
+        this.character.coinPrecent = 0;
+      }
+      this.bottleBar.setPercentage(this.character.bottlePrecent);
+      this.level.collectableItems.splice(this.level.collectableItems.indexOf(item), 1);
+    }
   }
 
 
@@ -114,21 +126,8 @@ class World {
     this.ctx.translate(this.camara_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
-    this.ctx.translate(-this.camara_x, 0);
-    this.addToMap(this.healthBar);
-    this.addToMap(this.coinBar);
-    this.addToMap(this.bottleBar);
-    this.addToMap(this.bossBar);
-    this.ctx.translate(this.camara_x, 0);
-
-
-    this.addToMap(this.character);
-    this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.collectableItems);
-    this.addObjectsToMap(this.throwableItem);
-    this.ctx.translate(-this.camara_x, 0);
-
+    this.camaraFixedObjects();
+    this.levelMovingObjects();
 
     let self = this;
     requestAnimationFrame(function () {
@@ -136,23 +135,46 @@ class World {
     });
   }
 
+
+  camaraFixedObjects() {
+    this.ctx.translate(-this.camara_x, 0);
+    this.addToMap(this.healthBar);
+    this.addToMap(this.coinBar);
+    this.addToMap(this.bottleBar);
+    this.addToMap(this.bossBar);
+    this.ctx.translate(this.camara_x, 0);
+  }
+
+
+  levelMovingObjects() {
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.collectableItems);
+    this.addObjectsToMap(this.throwableItem);
+    this.ctx.translate(-this.camara_x, 0);
+  }
+
+
   addObjectsToMap(objects) {
     objects.forEach(o => {
       this.addToMap(o);
     })
   };
 
+
   addToMap(mo) {
     if (mo.otherDiretion) {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    //mo.drawFrame(this.ctx);
+    mo.drawFrame(this.ctx);
 
     if (mo.otherDiretion) {
       this.flipImageBack(mo);
     }
   }
+
 
   flipImage(mo) {
     this.ctx.save();
@@ -160,6 +182,7 @@ class World {
     this.ctx.scale(-1, 1);
     mo.x = mo.x * -1;
   }
+
 
   flipImageBack(mo) {
     mo.x = mo.x * -1;
