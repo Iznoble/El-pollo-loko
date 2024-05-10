@@ -9,6 +9,7 @@ class MovableObject extends drawableObject {
     bottlePrecent = 0;
     animationCompleted = false;
     audio = new Sounds();
+    isPlayingAudio = false;
     offset = {
         top: 0,
         bottom: 0,
@@ -46,6 +47,22 @@ class MovableObject extends drawableObject {
             this.bottlePrecent += 20;
         }
     }
+
+
+    muteAudio() {
+        document.addEventListener('DOMContentLoaded', () => {
+          let button = document.getElementById('audio');
+          if (button) {
+            button.addEventListener('click', () => {
+              if (!this.isPlayingAudio) {
+                this.audio.muteAll();
+              } else {
+                this.audio.unmuteAll();
+              }
+            });
+          }
+        });
+      }
 
 
     isColliding(mo) {

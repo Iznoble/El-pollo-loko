@@ -12,6 +12,7 @@ function getFullscreen() {
 
 
 function toggleVolume(img) {
+   
   if (img.src.includes('volume_on.png')) {
     img.src = 'img/0_symbols/volume_off.png';
     audio.muteAll();
