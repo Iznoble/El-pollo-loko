@@ -46,7 +46,7 @@ class Chicken extends MovableObject {
     
         setInterval(() => {
             if (this.isDead() && !isDeadAudioPlayed) {
-                this.audio.level_audio.chicken_dead.play();
+                audio.level_audio.chicken_dead.play();
                 this.loadImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
                 this.speed = 0;
                 isDeadAudioPlayed = true;

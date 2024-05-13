@@ -1,3 +1,5 @@
+let isPlayingAudio = true;
+
 function getFullscreen() {
   let doc = document.documentElement;
 
@@ -12,13 +14,24 @@ function getFullscreen() {
 
 
 function toggleVolume(img) {
-   
+
   if (img.src.includes('volume_on.png')) {
     img.src = 'img/0_symbols/volume_off.png';
-    audio.muteAll();
+    muteAudio();
   } else {
     img.src = 'img/0_symbols/volume_on.png';
+    muteAudio();
+  }
+}
+
+
+function muteAudio() {
+  if (isPlayingAudio) {
+    audio.muteAll();
+    isPlayingAudio = false;
+  } else {
     audio.unmuteAll();
+    isPlayingAudio = true;
   }
 }
 

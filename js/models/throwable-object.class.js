@@ -56,7 +56,7 @@ class Throwable extends MovableObject {
             setTimeout(() => {
                 this.world.throwableItem.splice(index, 1);
             }, 500);
-            this.audio.level_audio.brokenBottle.play();
+            audio.level_audio.brokenBottle.play();
         }
     }
 

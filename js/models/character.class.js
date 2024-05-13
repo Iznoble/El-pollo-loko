@@ -83,7 +83,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_JUMP);
         this.applyGravity();
-        this.muteAudio();
         this.animate();
     }
 
@@ -97,7 +96,7 @@ class Character extends MovableObject {
 
     moveCharacter() {
         setInterval(() => {
-            this.audio.character_audio.walking.pause();
+            audio.character_audio.walking.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 //console.log(this.x);
@@ -107,7 +106,7 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.currentImage = 0;
-                this.audio.character_audio.jump.play();
+                audio.character_audio.jump.play();
                 this.jump();
             }
             this.world.camara_x = -this.x + 100;
@@ -125,14 +124,15 @@ class Character extends MovableObject {
                 this.idleTime = 0;
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
-                this.audio.character_audio.walking.play();
+                audio.character_audio.walking.play();
                 this.idleTime = 0;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                this.audio.character_audio.hurt.play();
+                audio.character_audio.hurt.play();
             } else if (this.isDead() && !this.deadSoundPlayed) {
                 this.playAnimation(this.IMAGES_DEAD);
-                this.audio.character_audio.dead.play();
+                audio.character_audio.dead.play();
+                gameOverScreen();
                 this.deadSoundPlayed = true;
             } else {
                 this.getSleppy();

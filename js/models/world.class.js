@@ -27,6 +27,7 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.boss.world = this;
   }
 
 
@@ -40,6 +41,9 @@ class World {
           this.character.jump();
           enemy.hit();
           this.deleteEnemy(enemy);
+        } else if (this.character.isColliding(this.boss)) {
+          this.character.hit();
+          this.healthBar.setPercentage(this.character.energy);
         } else {
           this.checkItemCollison(enemy);
         }
@@ -65,10 +69,12 @@ class World {
       if (item.isColliding(enemy)) {
         itemCollision = true;
         enemy.hit();
-        if (enemy instanceof Endboss) {
-          this.bossBar.setPercentage(enemy.energy);
-        }
         this.throwableItem.splice(item, 1);
+      } else if (item.isColliding(this.boss)) {
+        itemCollision = true;
+        this.boss.hit();
+        this.throwableItem.splice(item, 1);
+        this.bossBar.setPercentage(this.boss.energy);
       }
     });
 
@@ -83,7 +89,7 @@ class World {
       if (this.character.bottlePrecent > 0) {
         let bottle = new Throwable(this.character.x, this.character.y, this);
         this.throwableItem.push(bottle);
-        this.audio.character_audio.throw.play();
+        audio.character_audio.throw.play();
         this.character.bottlePrecent -= 20;
         this.bottleBar.setPercentage(this.character.bottlePrecent);
       }
@@ -104,9 +110,9 @@ class World {
     if (this.character.isColliding(item)) {
       this.character.getItem(item);
       if (item instanceof bottle) {
-        this.audio.level_audio.collectBottle.play();
+        audio.level_audio.collectBottle.play();
       } else if (item instanceof coins) {
-        this.audio.level_audio.collectCoin.play();
+        audio.level_audio.collectCoin.play();
       }
       this.coinBar.setPercentage(this.character.coinPrecent);
       if (this.character.coinPrecent >= 100) {
@@ -148,6 +154,7 @@ class World {
 
   levelMovingObjects() {
     this.addToMap(this.character);
+    this.addToMap(this.boss);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.collectableItems);

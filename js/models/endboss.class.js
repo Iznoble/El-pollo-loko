@@ -9,6 +9,8 @@ class Endboss extends MovableObject {
         right: 20,
         left: 20
     };
+    world;
+
 
     IMAGES_INTRO = [
         "img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -26,6 +28,17 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/1_walk/G2.png',
         'img/4_enemie_boss_chicken/1_walk/G3.png',
         'img/4_enemie_boss_chicken/1_walk/G4.png',
+    ];
+
+    IMAGES_ATTACKING = [
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png',
+        'img/4_enemie_boss_chicken/3_attack/G13.png'
     ];
 
     IMAGES_HURT = [
@@ -46,10 +59,11 @@ class Endboss extends MovableObject {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_INTRO);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.energy = 0;
-        this.x = 4200;
+        this.energy = 50;
+        this.x = 1000;
         this.startIntro();
     }
 
@@ -58,36 +72,57 @@ class Endboss extends MovableObject {
     startIntro() {
         let i = 0;
         let introFinished = false;
-        const introInterval = setInterval(() => {
-            if (this.x < 4000 && !introFinished) {
-                this.playAnimation(this.IMAGES_INTRO);
-                if (i >= this.IMAGES_INTRO.length - 1) {
-                    introFinished = true;
-                    i = 0;
-                }
-            } else {
-                clearInterval(introInterval); // Stoppe das Intro-Interval, um sicherzustellen, dass es nur einmal abgespielt wird
-                this.startWalking();
+
+        const checkIntroInterval = setInterval(() => {
+            if (this.world.character.x > 300 && !introFinished) {
+                clearInterval(checkIntroInterval); // Stoppe das Überprüfungs-Interval
+
+                const introInterval = setInterval(() => {
+                    this.playAnimation(this.IMAGES_INTRO);
+                    if (i >= this.IMAGES_INTRO.length - 1) {
+                        introFinished = true;
+                        clearInterval(introInterval); // Stoppe das Intro-Interval nach Abschluss der Animation
+                        this.startWalking();
+                    }
+                    i++;
+                }, 300);
             }
-            i++;
-        }, 1000);
+        }, 300);
     }
 
 
     startWalking() {
+        const attack = setInterval(() => {
+            this.startAttacking();
+        }, 2000);
 
         setInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                this.audio.endboss_audio.bossHurt.play();
+                audio.endboss_audio.bossHurt.play();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.currentImage = 2;
+                clearInterval(attack);
+                this.x = this.x;
             } else {
                 this.moveLeft();
                 this.otherDiretion = false;
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);
+
+    }
+
+    startAttacking() {
+        let finish = false;
+        setTimeout(() => {
+            if (!finish) {
+                this.playAnimation(this.IMAGES_ATTACKING);
+                finish = true;
+                this.x -= 50;
+            }
+        }, 1000);
+
     }
 }

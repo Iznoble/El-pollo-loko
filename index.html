@@ -31,8 +31,8 @@
 
 <body id="fullscreen" onload="init()">
     <h1>El Pollo Loco</h1>
-    <div>
-        <img class="start-img" id="startImg" src="img/9_intro_outro_screens/start/startscreen_2.png">
+    <div class="responsiv">
+        <img class="screen-img" id="startImg" src="img/9_intro_outro_screens/start/startscreen_2.png">
         <div class="test">
             <div>
                 <h5 onclick="startGame()" class="start-btn" id="startBtn">Start</h5>
@@ -43,6 +43,13 @@
             </div>
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+    <div id="gameOver" class="d-none">
+        <img class="screen-img" src="img/9_intro_outro_screens/game_over/game over.png">
+        <div class="game-over-btns">
+            <button onclick="startGame()" class="option">Again</button>
+            <button onclick="backToMenu()" class="option">Main Menu</button>
+        </div>
     </div>
 </body>
 

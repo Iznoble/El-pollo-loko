@@ -14,11 +14,35 @@ function startGame() {
 
     let overlay = document.getElementById('startImg');
     let startButton = document.getElementById('startBtn');
+    let gameOver = document.getElementById('gameOver');
 
     overlay.classList.add('d-none');
     startButton.classList.add('d-none');
+    gameOver.classList.add('d-none');
     audio.level_audio.level1.play();
     world = new World(canvas, keyboard, level);
+}
+
+
+function gameOverScreen() {
+    let gameOver = document.getElementById('gameOver');
+
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    gameOver.classList.remove('d-none');
+    gameOver.classList.add('game-over');
+    audio.level_audio.level1.pause();
+}
+
+
+function backToMenu() {
+    let overlay = document.getElementById('startImg');
+    let startButton = document.getElementById('startBtn');
+    let gameOver = document.getElementById('gameOver');
+
+
+    overlay.classList.remove('d-none');
+    startButton.classList.remove('d-none');
+    gameOver.classList.add('d-none');
 }
 
 
