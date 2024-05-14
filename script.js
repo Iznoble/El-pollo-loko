@@ -34,6 +34,3 @@ function muteAudio() {
     isPlayingAudio = true;
   }
 }
-
-
-

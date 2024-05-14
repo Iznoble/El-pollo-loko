@@ -108,8 +108,89 @@ h1 {
     background-color: rgb(255, 156, 0);
 }
 
+.mobile {
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0px;
+    height: 24vh;
+    align-items: flex-end;
+}
 
-@media only screen and (max-width: 950px) {
+.left-right-btns img {
+    height: 12vh;
+    margin-right: 24px;
+    filter: hue-rotate(124deg);}
+
+.action-btns img {
+    margin-left: 24px;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.jump {
+    height: 24vh;
+}
+
+.throw {
+    height: 16vh;
+}
+
+.rotate-device {
+    background-color: blue;
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    z-index: 9999;
+    font-size: 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 940px) {
+    canvas {
+        height: 100vh;
+        width: 100%;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .responsiv {
+        position: relative;
+        width: 100%;
+    }
+
+    .screen-img {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .test {
+        width: 100vw;
+    }
+
+    .game-over {
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .game-over-btns {
+        height: 100vh;
+    }
+
+    .option {
+        padding: 12px;
+    }
+
+}
+
+
+@media only screen and (max-width: 720px) {
     canvas {
         height: 100vh;
         width: 100%;
