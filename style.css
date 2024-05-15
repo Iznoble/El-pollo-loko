@@ -239,7 +239,7 @@ h1 {
     align-items: center;
 }
 
-@media only screen and (max-width: 910px) {
+@media only screen and (max-width: 920px) {
     canvas {
         height: 100vh;
         width: 100%;
@@ -277,7 +277,7 @@ h1 {
     }
 
     .left-right-btns img {
-        height: 6vh;
+        height: 10vh;
     }
 
     .game-over {
