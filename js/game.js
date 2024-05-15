@@ -88,7 +88,7 @@ function backToMenu() {
 
 function rotateNotification() {
     let notifakasion = document.getElementById('rotate-device');
-    if (window.innerWidth < 650) {
+    if (window.innerHeight > window.innerWidth) {
         notifakasion.classList.remove('d-none');
         notifakasion.classList.add('rotate-device')
     } else {
@@ -98,7 +98,6 @@ function rotateNotification() {
 }
 
 window.addEventListener('resize', rotateNotification);
-window.addEventListener('resize', showMobileButtons);
 
 
 window.addEventListener('keydown', (event) => {
