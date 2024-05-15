@@ -271,6 +271,15 @@ h1 {
         height: 100vh;
     }
 
+    .mobile {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .left-right-btns img {
+        height: 6vh;
+    }
+
     .game-over {
         top: 0;
         width: 100vw;

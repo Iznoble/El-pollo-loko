@@ -15,7 +15,7 @@ function startGame() {
     audio.level_audio.level1.play();
     world = new World(canvas, keyboard, level);
     hideMainScreen();
-    showRotateMassage();
+    showMobileButtons();
     mobileButtons();
 }
 
@@ -35,11 +35,14 @@ function hideMainScreen() {
 }
 
 
-function showRotateMassage() {
+function showMobileButtons() {
     let mobileHud = document.getElementById('mobileHud');
-    if (window.innerWidth < 720) {
+    if (window.innerWidth < 940) {
         mobileHud.classList.remove('d-none');
         mobileHud.classList.add('mobile');
+    }else {
+        mobileHud.classList.remove('mobile');
+        mobileHud.classList.add('d-none');
     }
 }
 
@@ -95,6 +98,7 @@ function rotateNotification() {
 }
 
 window.addEventListener('resize', rotateNotification);
+window.addEventListener('resize', showMobileButtons);
 
 
 window.addEventListener('keydown', (event) => {
