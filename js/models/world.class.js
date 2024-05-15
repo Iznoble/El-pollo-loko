@@ -59,7 +59,7 @@ class World {
       if (index > -1) {
         this.level.enemies.splice(index, 1);
       }
-    }, 1500);
+    }, 1000);
   }
 
 
@@ -115,7 +115,7 @@ class World {
         audio.level_audio.collectCoin.play();
       }
       this.coinBar.setPercentage(this.character.coinPrecent);
-      if (this.character.coinPrecent >= 100) {
+      if (this.character.coinPrecent == 100) {
         this.character.bottlePrecent += 20;
         this.character.coinPrecent = 0;
       }

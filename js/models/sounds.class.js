@@ -19,6 +19,8 @@ class Sounds {
       };
   
       this.endboss_audio = {
+        bossIntro: new Audio('audio/boss_intro.mp3'),
+        bossDeath: new Audio('audio/boss_death.mp3'),
         bossHurt: new Audio('audio/endboss_hit.mp3'),
       };
     }

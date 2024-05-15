@@ -32,13 +32,13 @@ class Endboss extends MovableObject {
 
     IMAGES_ATTACKING = [
         'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G13.png'
+        'img/4_enemie_boss_chicken/3_attack/G14.png',
+        'img/4_enemie_boss_chicken/3_attack/G15.png',
+        'img/4_enemie_boss_chicken/3_attack/G16.png',
+        'img/4_enemie_boss_chicken/3_attack/G17.png',
+        'img/4_enemie_boss_chicken/3_attack/G18.png',
+        'img/4_enemie_boss_chicken/3_attack/G19.png',
+        'img/4_enemie_boss_chicken/3_attack/G20.png'
     ];
 
     IMAGES_HURT = [
@@ -79,13 +79,14 @@ class Endboss extends MovableObject {
 
                 const introInterval = setInterval(() => {
                     this.playAnimation(this.IMAGES_INTRO);
+                    audio.endboss_audio.bossIntro.play();
                     if (i >= this.IMAGES_INTRO.length - 1) {
                         introFinished = true;
                         clearInterval(introInterval); // Stoppe das Intro-Interval nach Abschluss der Animation
                         this.startWalking();
                     }
                     i++;
-                }, 300);
+                }, 150);
             }
         }, 300);
     }
@@ -93,8 +94,8 @@ class Endboss extends MovableObject {
 
     startWalking() {
         const attack = setInterval(() => {
-            this.startAttacking();
-        }, 2000);
+                this.startAttacking();
+        }, 1000);
 
         setInterval(() => {
             if (this.isHurt()) {
@@ -105,7 +106,10 @@ class Endboss extends MovableObject {
                 this.currentImage = 2;
                 clearInterval(attack);
                 this.x = this.x;
-                gameWonScreen();
+                audio.endboss_audio.bossDeath.play();
+                setTimeout(() => {
+                    gameWonScreen();
+                }, 1500);
             } else {
                 this.moveLeft();
                 this.otherDiretion = false;
@@ -116,14 +120,9 @@ class Endboss extends MovableObject {
     }
 
     startAttacking() {
-        let finish = false;
         setTimeout(() => {
-            if (!finish) {
-                this.playAnimation(this.IMAGES_ATTACKING);
-                finish = true;
-                this.x -= 50;
-            }
-        }, 1000);
-
+            this.playAnimation(this.IMAGES_ATTACKING);
+            this.x -= 20;
+        }, 1000/ 60);
     }
 }

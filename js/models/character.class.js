@@ -99,7 +99,7 @@ class Character extends MovableObject {
             audio.character_audio.walking.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
-                //console.log(this.x);
+                console.log(this.x);
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
@@ -137,7 +137,7 @@ class Character extends MovableObject {
             } else {
                 this.getSleppy();
             }
-        }, 125);
+        }, 100);
     }
 
 

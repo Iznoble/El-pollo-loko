@@ -7,11 +7,12 @@ let audio = new Sounds();
 
 function init() {
     canvas = document.getElementById('canvas');
+    rotateNotification();
 }
 
 function startGame() {
     let level = initLevel();
-    
+
     audio.level_audio.level1.play();
     world = new World(canvas, keyboard, level);
     hideMainScreen();
@@ -37,10 +38,10 @@ function hideMainScreen() {
 
 function showMobileButtons() {
     let mobileHud = document.getElementById('mobileHud');
-    if (window.innerWidth < 940) {
+    if (window.innerWidth < 1400) {
         mobileHud.classList.remove('d-none');
         mobileHud.classList.add('mobile');
-    }else {
+    } else {
         mobileHud.classList.remove('mobile');
         mobileHud.classList.add('d-none');
     }
@@ -88,14 +89,16 @@ function backToMenu() {
 
 function rotateNotification() {
     let notifakasion = document.getElementById('rotate-device');
-    if (window.innerHeight > window.innerWidth) {
+    if (notifakasion) {
+      if (window.innerHeight > window.innerWidth) {
         notifakasion.classList.remove('d-none');
-        notifakasion.classList.add('rotate-device')
-    } else {
+        notifakasion.classList.add('rotate-device');
+      } else {
         notifakasion.classList.add('d-none');
         notifakasion.classList.remove('rotate-device');
+      }
     }
-}
+  }
 
 window.addEventListener('resize', rotateNotification);
 

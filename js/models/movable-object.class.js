@@ -56,10 +56,10 @@ class MovableObject extends drawableObject {
 
 
     jumpOnEnemies(enemy) {
-        return this.x + this.width - this.offset.right > enemy.x + enemy.offset.left &&
-            this.y + this.height > enemy.y &&
-            this.x + this.offset.left < enemy.x + enemy.width - enemy.offset.right &&
-            this.y < enemy.y + enemy.height;
+        return this.x + this.width > enemy.x &&
+            this.x < enemy.x + enemy.width &&
+            this.y + this.height >= enemy.y &&
+            this.y + this.height <= enemy.y + enemy.height;
     }
 
 
