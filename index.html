@@ -29,11 +29,16 @@
     <title>Document</title>
 </head>
 
-<body id="fullscreen" onload="init()">
+<body id="fullscreen" onload="init()" onclick="closeSigns()">
+    <!--Main Screen-->
     <h1>El Pollo Loco</h1>
-    <div class="responsiv">
+    <div class="main-screen">
         <img class="screen-img" id="startImg" src="img/9_intro_outro_screens/start/startscreen_2.png">
-        <div class="test">
+        <div onclick="dontInteract(event)" class="top-buttons">
+            <div id="infoButton" class="infomations">
+                <img onclick="showHowToPlay()" src="img/0_symbols/how_to_play.png">
+                <img onmousedown="showLegalOptions()" src="img/0_symbols/info.png">
+            </div>
             <div>
                 <h5 onclick="startGame()" class="start-btn" id="startBtn">Start</h5>
             </div>
@@ -44,6 +49,47 @@
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
     </div>
+    <!--How to Play Page-->
+    <div id="howToPage" class="d-none">
+        <div class="first-layer">
+            <p>How to play:</p>
+            <p onmousedown="closeSigns()" style="cursor: pointer;">close</p>
+        </div>
+        <div class="second-layer">
+            <p>Press left/right to move</p>
+            <div>
+                <p>Press Space/<img src="img/2_character_pepe/3_jump/J-34.png"> to Jump</p>
+            </div>
+            <div>
+                <p>Press F/<img src="img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png">to throw Bottles</p>
+            </div>
+        </div>
+    </div>
+    <!--Legal notice Page-->
+    <div id="legalPage" class="legal-page d-none" onclick="dontInteract(event)">
+        <div>
+            <p onclick="closeSigns()" class="close-btn">close</p>
+        </div>
+        <div class="legal-options">
+            <div class="options">
+                <img src="img/3_enemies_chicken/chicken_small/1_walk/3_w.png">
+                <a target="_blank" href="./assets/impressum.html">Impressum</a>
+            </div>
+            <div class="options">
+                <img src="img/3_enemies_chicken/chicken_small/1_walk/3_w.png">
+                <a target="_blank" href="assets/datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+    <!--Winning Screen-->
+    <div id="gameWon" class="d-none">
+        <img class="screen-img" src="img/9_intro_outro_screens/win/win_2.png">
+        <div class="game-over-btns">
+            <button onclick="startGame()" class="option">Again</button>
+            <button onclick="backToMenu()" class="option">Main Menu</button>
+        </div>
+    </div>
+    <!--Gameover Screen-->
     <div id="gameOver" class="d-none">
         <img class="screen-img" src="img/9_intro_outro_screens/game_over/game over.png">
         <div class="game-over-btns">
@@ -51,6 +97,7 @@
             <button onclick="backToMenu()" class="option">Main Menu</button>
         </div>
     </div>
+    <!--Mobile Hud-->
     <div class="d-none" id="mobileHud">
         <div class="left-right-btns">
             <img class="left" id="left" src="img/10_mobile_assets/arrow_back.png">

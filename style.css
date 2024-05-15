@@ -55,24 +55,114 @@ h1 {
     height: 100vh;
 }
 
-.test {
+.top-buttons {
     position: absolute;
     display: flex;
     align-items: flex-start;
     width: 720px;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.infomations {
+    padding: 20px;
+}
+
+.infomations img {
+    height: 36px;
+    cursor: pointer;
+    margin-left: 16px;
+    filter: hue-rotate(149deg);
+}
+
+.how-to-page {
+    position: absolute;
+    top: 168px;
+    width: 720px;
+    height: 480px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(0, 0, 0, 0.7);
+}
+
+.how-to-page img {
+    height: 40px;
+}
+
+.how-to-page p {
+    margin: 0;
+    color: rgb(217,128,0);
+}
+
+.first-layer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.second-layer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legal-page {
+    width: 330px;
+    height: 260px;
+    background-image: url(img/0_symbols/sign.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    top: 32vh;
+    border-radius: 10%;
+}
+
+.close-btn {
+    font-size: 32px;
+    margin: 0;
+    padding: 10px;
+    margin-right: 50px;
+    margin-top: 12px;
+    margin-left: 30px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.legal-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legal-options img {
+    height: 50px;
+    transform: scaleX(-1);
+    margin-right: 10px;
+}
+
+.legal-options a {
+    font-size: 48px;
+    margin-right: 36px;
+    text-decoration: none;
+}
+
+.options {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .start-btn {
     font-size: 80px;
     margin: 0;
-    margin-right: 200px;
-    color: rgb(191,0,0);
+    color: rgb(191, 0, 0);
 }
 
 .start-btn:hover {
     cursor: pointer;
-    color: rgb(8,143,66);
+    color: rgb(8, 143, 66);
 }
 
 .screen-btns {
@@ -121,7 +211,8 @@ h1 {
 .left-right-btns img {
     height: 12vh;
     margin-right: 24px;
-    filter: hue-rotate(124deg);}
+    filter: hue-rotate(124deg);
+}
 
 .action-btns img {
     margin-left: 24px;
@@ -158,9 +249,13 @@ h1 {
         display: none;
     }
 
-    .responsiv {
+    .main-screen {
         position: relative;
-        width: 100%;
+        width: 100vw;
+    }
+
+    .top-buttons {
+        width: 100vw;
     }
 
     .screen-img {
@@ -169,8 +264,11 @@ h1 {
         height: 100vh;
     }
 
-    .test {
-        width: 100vw;
+    .how-to-page {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100vh;
     }
 
     .game-over {
@@ -200,9 +298,13 @@ h1 {
         display: none;
     }
 
-    .responsiv {
+    .main-screen {
         position: relative;
-        width: 100%;
+        width: 100vw;
+    }
+
+    .top-buttons {
+        width: 100vw;
     }
 
     .screen-img {
@@ -211,8 +313,11 @@ h1 {
         height: 100vh;
     }
 
-    .test {
-        width: 100vw;
+    .how-to-page {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100vh;
     }
 
     .game-over {
@@ -240,9 +345,13 @@ h1 {
         display: none;
     }
 
-    .responsiv {
+    .main-screen {
         position: relative;
-        width: 100%;
+        width: 100vw;
+    }
+
+    .top-buttons {
+        width: 100vw;
     }
 
     .screen-img {
@@ -251,8 +360,11 @@ h1 {
         height: 100vh;
     }
 
-    .test {
-        width: 100vw;
+    .how-to-page {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100vh;
     }
 
     .game-over {
@@ -268,5 +380,5 @@ h1 {
     .option {
         padding: 12px;
     }
-    
+
 }

@@ -11,22 +11,47 @@ function init() {
 
 function startGame() {
     let level = initLevel();
+    
+    audio.level_audio.level1.play();
+    world = new World(canvas, keyboard, level);
+    hideMainScreen();
+    showRotateMassage();
+    mobileButtons();
+}
 
+
+function hideMainScreen() {
     let overlay = document.getElementById('startImg');
+    let info = document.getElementById('infoButton');
     let startButton = document.getElementById('startBtn');
     let gameOver = document.getElementById('gameOver');
-    let mobileHud = document.getElementById('mobileHud');
+    let win = document.getElementById('gameWon');
 
     overlay.classList.add('d-none');
+    info.classList.add('d-none');
     startButton.classList.add('d-none');
+    win.classList.add('d-none');
     gameOver.classList.add('d-none');
+}
+
+
+function showRotateMassage() {
+    let mobileHud = document.getElementById('mobileHud');
     if (window.innerWidth < 720) {
         mobileHud.classList.remove('d-none');
         mobileHud.classList.add('mobile');
     }
-    audio.level_audio.level1.play();
-    world = new World(canvas, keyboard, level);
-    mobileButtons();
+}
+
+
+function gameWonScreen() {
+    let win = document.getElementById('gameWon');
+
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    win.classList.remove('d-none');
+    win.classList.add('game-over');
+    audio.level_audio.level1.pause();
+    audio.level_audio.gameWon.play();
 }
 
 
@@ -37,18 +62,22 @@ function gameOverScreen() {
     gameOver.classList.remove('d-none');
     gameOver.classList.add('game-over');
     audio.level_audio.level1.pause();
+    audio.level_audio.gameLost.play();
 }
 
 
 function backToMenu() {
     let overlay = document.getElementById('startImg');
     let startButton = document.getElementById('startBtn');
+    let info = document.getElementById('infoButton');
+    let win = document.getElementById('gameWon');
     let gameOver = document.getElementById('gameOver');
     let mobileHud = document.getElementById('mobileHud');
 
-
     overlay.classList.remove('d-none');
     startButton.classList.remove('d-none');
+    info.classList.remove('d-none');
+    win.classList.add('d-none');
     gameOver.classList.add('d-none');
     mobileHud.classList.remove('mobile');
 }

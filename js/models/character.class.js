@@ -132,8 +132,8 @@ class Character extends MovableObject {
             } else if (this.isDead() && !this.deadSoundPlayed) {
                 this.playAnimation(this.IMAGES_DEAD);
                 audio.character_audio.dead.play();
-                gameOverScreen();
                 this.deadSoundPlayed = true;
+                gameOverScreen();
             } else {
                 this.getSleppy();
             }

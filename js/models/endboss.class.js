@@ -62,8 +62,8 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.energy = 50;
-        this.x = 1000;
+        this.energy = 100;
+        this.x = 4200;
         this.startIntro();
     }
 
@@ -74,7 +74,7 @@ class Endboss extends MovableObject {
         let introFinished = false;
 
         const checkIntroInterval = setInterval(() => {
-            if (this.world.character.x > 300 && !introFinished) {
+            if (this.world.character.x > 3800 && !introFinished) {
                 clearInterval(checkIntroInterval); // Stoppe das Überprüfungs-Interval
 
                 const introInterval = setInterval(() => {
@@ -105,6 +105,7 @@ class Endboss extends MovableObject {
                 this.currentImage = 2;
                 clearInterval(attack);
                 this.x = this.x;
+                gameWonScreen();
             } else {
                 this.moveLeft();
                 this.otherDiretion = false;
