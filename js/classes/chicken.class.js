@@ -29,15 +29,19 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
-
-
-
+    /**
+     * 
+     * plays the animations for the chicken
+     */
     animate() {
         this.moveChicken();
         this.checkLife();
     }
 
-
+    /**
+     * 
+     * The chicken moves to the left
+     */
     moveChicken() {
         setInterval(() => {
             this.moveLeft();
@@ -45,7 +49,10 @@ class Chicken extends MovableObject {
         }, 1000 / 60);
     }
 
-
+    /**
+     * 
+     * checks if the chicken is done and plays the animations based on that
+     */
     checkLife() {
         let isDeadAudioPlayed = false;
 
@@ -62,7 +69,10 @@ class Chicken extends MovableObject {
         }, 200);
     }
 
-
+    /**
+     * 
+     * Loads the image once the chicken is done
+     */
     playDeadAnimation() {
         this.loadImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
         this.speed = 0;

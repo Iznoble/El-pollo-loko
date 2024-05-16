@@ -1,12 +1,18 @@
 let isPlayingAudio = true;
 
-
+/**
+ * 
+ * Shows the link to data protection and legal notice
+ */
 function showLegalOptions() {
   let sign = document.getElementById('legalPage');
   sign.classList.remove('d-none');
 }
 
-
+/**
+ * 
+ * Allows you to close the window, even outside the window
+ */
 function closeSigns() {
   let sign = document.getElementById('legalPage');
   let howToPage = document.getElementById('howToPage');
@@ -15,12 +21,18 @@ function closeSigns() {
   sign.classList.add('d-none');
 }
 
-
+/**
+ * 
+ * Prevents the window from closing when you click on it
+ */
 function dontInteract(event) {
   event.stopPropagation();
 }
 
-
+/**
+ * 
+ * Changes the image of the speaker symbol when there is sound or not
+ */
 function toggleVolume(img) {
 
   if (img.src.includes('volume_on.png')) {
@@ -32,7 +44,10 @@ function toggleVolume(img) {
   }
 }
 
-
+/**
+ * 
+ * Allows you to mute and unmute the game
+ */
 function muteAudio() {
   if (isPlayingAudio) {
     audio.muteAll();
@@ -43,7 +58,10 @@ function muteAudio() {
   }
 }
 
-
+/**
+ * 
+ * Allows full screen
+ */
 function getFullscreen() {
   let doc = document.documentElement;
 
@@ -56,7 +74,10 @@ function getFullscreen() {
   }
 }
 
-
+/**
+ * 
+ * Shows the game instructions
+ */
 function showHowToPlay() {
   let howToPage = document.getElementById('howToPage');
   howToPage.classList.remove('d-none');

@@ -139,11 +139,11 @@ h1 {
     height: 50px;
     transform: scaleX(-1);
     margin-right: 10px;
+    margin-left: 20px;
 }
 
 .legal-options a {
-    font-size: 48px;
-    margin-right: 36px;
+    font-size: 40px;
     text-decoration: none;
 }
 
@@ -237,7 +237,18 @@ h1 {
     font-size: 60px;
     justify-content: center;
     align-items: center;
+    padding-left: 42px;
 }
+
+.impressum {
+    font-size: 20px;
+    padding: 24px;
+}
+
+.impressum a {
+    text-decoration: none;
+}
+
 
 @media only screen and (max-width: 1400px) {
     canvas {
@@ -293,6 +304,11 @@ h1 {
         padding: 12px;
     }
 
+    .impressum {
+        width: 80vw;
+        height: 100vh;
+    }
+
 }
 
 
@@ -342,6 +358,10 @@ h1 {
         padding: 12px;
     }
 
+    .impressum {
+        width: 80vw;
+        height: 100vh;
+    }
 }
 
 @media only screen and (max-height: 480px) {
@@ -389,4 +409,8 @@ h1 {
         padding: 12px;
     }
 
+    .impressum {
+        width: 80vw;
+        height: 100vh;
+    }
 }

@@ -33,6 +33,10 @@ class Throwable extends MovableObject {
         this.throw();
     }
 
+    /**
+     * 
+     * plays the throwing animation and checks whether the bottle is above the ground
+     */
     throw() {
         this.speedY = 10;
         this.applyGravity();
@@ -46,7 +50,10 @@ class Throwable extends MovableObject {
         }, 25);
     }
 
-
+    /**
+     * 
+     * plays the broken bottle animation and removes it from the array
+     */
     brokenBottle() {
         this.x += 0;
         this.speedY = 0;

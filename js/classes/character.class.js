@@ -87,13 +87,19 @@ class Character extends MovableObject {
     }
 
 
-
+    /**
+     * 
+     * Performs every moveset for the character
+     */
     animate() {
         this.moveCharacter();
         this.animateCharacter();
     }
 
-
+    /**
+     * 
+     * Moves the character when a certain key is pressed
+     */
     moveCharacter() {
         setInterval(() => {
             audio.character_audio.walking.pause();
@@ -112,7 +118,10 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
-
+    /**
+     * 
+     * Plays all animations for the character
+     */
     animateCharacter() {
         setInterval(() => {
             if (this.isAboveGround()) {
@@ -129,7 +138,10 @@ class Character extends MovableObject {
         }, 100);
     }
 
-
+    /**
+     * 
+     * Plays the jump animation
+     */
     playJumpAnimation() {
         if (this.speedY < 0 && this.currentImage > 4) {
             this.currentImage = 4;
@@ -138,20 +150,29 @@ class Character extends MovableObject {
         this.idleTime = 0;
     }
 
-
+    /**
+     * 
+     * Plays the walking animation
+     */
     playWalkingAnimation() {
         this.playAnimation(this.IMAGES_WALKING);
         audio.character_audio.walking.play();
         this.idleTime = 0;
     }
 
-
+    /**
+     * 
+     * Plays the hurt animation
+     */
     playHurtAnimation() {
         this.playAnimation(this.IMAGES_HURT);
         audio.character_audio.hurt.play();
     }
 
-
+    /**
+     * 
+     * Plays the death animation
+     */
     playDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
         audio.character_audio.dead.play();
@@ -159,7 +180,10 @@ class Character extends MovableObject {
         gameOverScreen();
     }
 
-
+    /**
+     * 
+     * After a certain amount of time the character falls asleep
+     */
     getSleppy() {
         const currentTime = new Date().getTime();
         const timeSinceLastMove = currentTime - this.lastMoveTime;

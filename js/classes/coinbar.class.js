@@ -19,13 +19,20 @@ class coinStatus extends MovableObject {
         this.setPercentage();
     }
 
+    /**
+     * 
+     * @param {number} percentage The percentage of coins collected 
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGESCOINS[this.resolveImageIndex()];
         this.img = this.ImageCache[path];
     }
 
-
+    /**
+     * 
+     * @returns The image based on the percentage number
+     */
     resolveImageIndex() {
         if (this.percentage == 0) {
             return 0;

@@ -22,14 +22,20 @@ class bossHealth extends drawableObject {
         this.setPercentage(100);
     }
 
-
+    /**
+     * 
+     * @param {number} percentage the percentage of the final boss alive 
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.ImageCache[path];
     }
 
-
+    /**
+     * 
+     * @returns The image based on the percentage number
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

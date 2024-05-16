@@ -25,13 +25,21 @@ class Sounds {
         bossHurt: new Audio('audio/endboss_hit.mp3'),
       };
     }
-  
+
+    /**
+     * 
+     * Mutes all sounds in the game
+     */
     muteAll() {
       Object.values(this.level_audio).forEach(audio => audio.muted = true);
       Object.values(this.character_audio).forEach(audio => audio.muted = true);
       Object.values(this.endboss_audio).forEach(audio => audio.muted = true);
     }
   
+    /**
+     * 
+     * Unmutes all sounds in the game
+     */
     unmuteAll() {
       Object.values(this.level_audio).forEach(audio => audio.muted = false);
       Object.values(this.character_audio).forEach(audio => audio.muted = false);

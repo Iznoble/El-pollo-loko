@@ -4,12 +4,20 @@ let keyboard = new Keyboard();
 let audio = new Sounds();
 
 
-
+/**
+ * 
+ * loads the canvas before starting the game
+ */
 function init() {
     canvas = document.getElementById('canvas');
     rotateNotification();
 }
 
+
+/**
+ * 
+ * Loads all elements of the game
+ */
 function startGame() {
     let level = initLevel();
 
@@ -20,7 +28,10 @@ function startGame() {
     mobileButtons();
 }
 
-
+/**
+ * 
+ * When you start the game the main menu is removed
+ */
 function hideMainScreen() {
     let overlay = document.getElementById('startImg');
     let info = document.getElementById('infoButton');
@@ -35,7 +46,10 @@ function hideMainScreen() {
     gameOver.classList.add('d-none');
 }
 
-
+/**
+ * 
+ * Displays the mobile keys
+ */
 function showMobileButtons() {
     let mobileHud = document.getElementById('mobileHud');
     if (window.innerWidth < 1400) {
@@ -47,7 +61,10 @@ function showMobileButtons() {
     }
 }
 
-
+/**
+ * 
+ * Ends the game and shows the game win screen
+ */
 function gameWonScreen() {
     let win = document.getElementById('gameWon');
 
@@ -58,7 +75,10 @@ function gameWonScreen() {
     audio.level_audio.gameWon.play();
 }
 
-
+/**
+ * 
+ * Ends the game and shows the game over screen
+ */
 function gameOverScreen() {
     let gameOver = document.getElementById('gameOver');
 
@@ -69,7 +89,10 @@ function gameOverScreen() {
     audio.level_audio.gameLost.play();
 }
 
-
+/**
+ * 
+ * After finishing the game, this button allows you to return to the main menu
+ */
 function backToMenu() {
     let overlay = document.getElementById('startImg');
     let startButton = document.getElementById('startBtn');
@@ -86,7 +109,10 @@ function backToMenu() {
     mobileHud.classList.remove('mobile');
 }
 
-
+/**
+ * 
+ * Notifies you when you need to turn the device
+ */
 function rotateNotification() {
     let notifakasion = document.getElementById('rotate-device');
     if (notifakasion) {
@@ -153,6 +179,10 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
+/**
+ * 
+ * Allows you to control the character using the mobile buttons
+ */
 function mobileButtons() {
     document.getElementById('left').addEventListener('touchstart', (e) => {
         e.preventDefault();

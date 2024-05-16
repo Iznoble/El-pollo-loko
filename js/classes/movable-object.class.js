@@ -15,9 +15,11 @@ class MovableObject extends drawableObject {
         left: 0
     };
 
-
+    /**
+     * 
+     * Allows gravity in the game
+     */
     applyGravity() {
-
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
@@ -28,7 +30,10 @@ class MovableObject extends drawableObject {
         }, 1000 / 30);
     }
 
-
+    /**
+     * checks whether an element is above the ground
+     * @returns whether the element is above the ground
+     */
     isAboveGround() {
         if (this instanceof Throwable) {
             return true;
@@ -37,7 +42,10 @@ class MovableObject extends drawableObject {
         }
     }
 
-
+    /**
+     * Checks whether the character collects an item and passes on the percentage
+     * @param {Array} item the respective item
+     */
     getItem(item) {
         if (item instanceof coins) {
             this.coinPrecent += 20;
@@ -46,7 +54,11 @@ class MovableObject extends drawableObject {
         }
     }
 
-
+    /**
+     * Checks whether one element collides with another
+     * @param {Array} mo All movable Object array
+     * @returns whether an element collides
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -54,7 +66,10 @@ class MovableObject extends drawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
-
+    /**
+     * 
+     * Checks whether an element was hit
+     */
     hit() {
         this.energy -= 10;
         if (this.energy < 0) {
@@ -64,19 +79,28 @@ class MovableObject extends drawableObject {
         }
     }
 
-
+    /**
+     * checks whether an element was hit
+     * @returns the time when the element was hit
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
-
+    /**
+     * checks whether an element is dead
+     * @returns whether an element is dead
+     */
     isDead() {
         return this.energy == 0;
     }
 
-
+    /**
+     * Plays every image in the array
+     * @param {Array} images The respective image array
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -84,7 +108,11 @@ class MovableObject extends drawableObject {
         this.currentImage++;
     }
 
-
+    /**
+     * plays each image in the array only once
+     * @param {Array} images The respective image array
+     * @returns whether each image was run through and played once
+     */
     playOnce(images) {
         if (this.animationCompleted) {
             return;
@@ -100,19 +128,28 @@ class MovableObject extends drawableObject {
         }
     }
 
-
+    /**
+     * 
+     * the element moves to the right
+     */
     moveRight() {
         this.x += this.speed;
         this.otherDiretion = false;
     }
 
-
+    /**
+     * 
+     * the element moves to the left
+     */
     moveLeft() {
         this.x -= this.speed;
         this.otherDiretion = true;
     }
 
-
+    /**
+     * 
+     * the element jumps
+     */
     jump() {
         this.speedY = 20;
     }

@@ -69,7 +69,10 @@ class Endboss extends MovableObject {
     }
 
 
-
+    /**
+     * 
+     * Plays the intro animation when the character encounters the final boss
+     */
     startIntro() {
         let introFinished = false;
 
@@ -81,7 +84,10 @@ class Endboss extends MovableObject {
         }, 300);
     }
 
-
+    /**
+     * plays the intro animation
+     * @param {boolean} introEnds checks whether the intro was played or not
+     */
     playIntro(introEnds) {
         let i = 0;
         const introInterval = setInterval(() => {
@@ -96,7 +102,10 @@ class Endboss extends MovableObject {
         }, 150);
     }
 
-
+    /**
+     * 
+     * animates the running animation
+     */
     startWalking() {
 
         setInterval(() => {
@@ -107,7 +116,10 @@ class Endboss extends MovableObject {
 
     }
 
-
+    /**
+     * 
+     * Plays the animations when the character interacts with the final boss
+     */
     animateEndboss() {
         setInterval(() => {
             if (this.isDead()) {
@@ -120,7 +132,10 @@ class Endboss extends MovableObject {
         }, 200);
     }
 
-
+    /**
+     * 
+     * plays the attack animation and decreases the x coordinate
+     */
     startAttacking() {
         setTimeout(() => {
             this.playAnimation(this.IMAGES_ATTACKING);
@@ -128,7 +143,10 @@ class Endboss extends MovableObject {
         }, 1800);
     }
 
-
+    /**
+     * 
+     * Plays the death animation and then shows the winning screen
+     */
     playDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
         this.currentImage = 2;

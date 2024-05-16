@@ -20,13 +20,20 @@ class bottleStatus extends MovableObject {
         this.setPercentage();
     }
 
+    /**
+     * 
+     * @param {number} percentage The percentage of bottles collected
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGESBOTTLE[this.resolveImageIndex()];
         this.img = this.ImageCache[path];
     }
 
-
+    /**
+     * loads the correct image for the bottle status based on the percentage
+     * @returns The image based on the percentage number
+     */
     resolveImageIndex() {
         if (this.percentage == 0) {
             return 0;

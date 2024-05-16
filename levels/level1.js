@@ -1,3 +1,7 @@
+/**
+ * 
+ * @returns The content that the level has
+ */
 function initLevel() {
 
     let level1 = new Level(
