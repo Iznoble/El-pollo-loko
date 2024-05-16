@@ -171,6 +171,7 @@ class Character extends MovableObject {
                 audio.character_audio.snoring.play();
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
+                audio.character_audio.snoring.pause();
             }
         } else {
             this.playAnimation(this.IMAGES_IDLE);
