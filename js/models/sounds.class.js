@@ -16,6 +16,7 @@ class Sounds {
         dead: new Audio('audio/dead_sound.mp3'),
         throw: new Audio('audio/throw.mp3'),
         jump: new Audio('audio/jump.mp3'),
+        snoring: new Audio('audio/snoring.mp3')
       };
   
       this.endboss_audio = {

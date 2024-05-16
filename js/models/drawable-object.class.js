@@ -18,26 +18,6 @@ class drawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    //Can be removed after finish
-    drawFrame(ctx) {
-
-        if (this instanceof Character || this instanceof Chicken || this instanceof coins || this instanceof Throwable || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.lineWidth = '4';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.left - this.offset.right, this.height - this.offset.top - this.offset.bottom);
-            ctx.stroke();
-        }
-    }
-
-
-
 
     loadImages(arr) {
         arr.forEach((path) => {

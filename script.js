@@ -49,9 +49,9 @@ function getFullscreen() {
 
   if (doc.requestFullscreen) {
     doc.requestFullscreen();
-  } else if (doc.webkitRequestFullscreen) { /* Safari */
+  } else if (doc.webkitRequestFullscreen) { 
     doc.webkitRequestFullscreen();
-  } else if (doc.msRequestFullscreen) { /* IE11 */
+  } else if (doc.msRequestFullscreen) { 
     doc.msRequestFullscreen();
   }
 }

@@ -8,6 +8,7 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
+            new Chicken(),
         ],
 
         [
@@ -16,6 +17,9 @@ function initLevel() {
             new Cloud('img/5_background/layers/4_clouds/2.png', 719 * 2),
             new Cloud('img/5_background/layers/4_clouds/1.png', 719 * 3),
             new Cloud('img/5_background/layers/4_clouds/2.png', 719 * 4),
+            new Cloud('img/5_background/layers/4_clouds/2.png', 719 * 5),
+            new Cloud('img/5_background/layers/4_clouds/2.png', 719 * 6)
+
         ],
 
         [
@@ -61,21 +65,21 @@ function initLevel() {
         ],
 
         [
-            new coins(50, 700),
-            new coins(50, 750),
-            new coins(50, 800),
+            new coins(70, 700),
+            new coins(70, 750),
+            new coins(70, 800),
             new coins(270, 1400),
             new coins(210, 1450),
-            new coins(180, 1500),
+            new coins(160, 1500),
             new coins(140, 1550),
-            new coins(210, 2550),
-            new coins(160, 2600),
-            new coins(210, 2650),
-            new coins(200, 3200),
-            new coins(220, 3300),
-            new coins(190, 3450),
-            new coins(220, 3550),
-            new coins(210, 3650),
+            new coins(190, 2550),
+            new coins(130, 2600),
+            new coins(190, 2650),
+            new coins(180, 3200),
+            new coins(190, 3300),
+            new coins(200, 3400),
+            new coins(190, 3500),
+            new coins(180, 3600),
             new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 450),
             new bottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 600),
             new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 1200),
@@ -83,6 +87,7 @@ function initLevel() {
             new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 1700),
             new bottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1900),
             new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 2600),
+            new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 2900),
             new bottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 3200),
             new bottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png", 3600),
 

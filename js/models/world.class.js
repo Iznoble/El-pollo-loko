@@ -20,7 +20,7 @@ class World {
     this.level = level;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
     this.collectItems();
   }
 
@@ -31,28 +31,45 @@ class World {
   }
 
 
-  checkCollisions() {
+  run() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
-          this.character.jump();
-          enemy.hit();
-          this.deleteEnemy(enemy);
-        } else if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.healthBar.setPercentage(this.character.energy);
-        } else if (this.character.isColliding(this.boss)) {
-          this.character.hit();
-          this.healthBar.setPercentage(this.character.energy);
-        }
-        this.checkItemCollison(enemy);
-      });
-  
-      // Überprüfe auch die Kollisionen mit dem Boss
-      this.checkItemCollison(this.boss);
-  
+      this.chickenColliding();
+      this.bossColliding();
       this.checkThrow();
     }, 100);
+  }
+
+
+  chickenColliding() {
+    this.level.enemies.forEach((chicken) => {
+      if (this.character.isAboveGround() && this.character.isColliding(chicken)) {
+        this.jumpOnChicken(chicken);
+      } else if (this.character.isColliding(chicken)) {
+        this.lostEnergy();
+      }
+      this.checkItemCollison(chicken);
+    });
+  }
+
+
+  jumpOnChicken(chicken) {
+    this.character.jump();
+    chicken.hit();
+    this.deleteEnemy(chicken);
+  }
+
+
+  bossColliding() {
+    if (this.character.isColliding(this.boss)) {
+      this.lostEnergy();
+    }
+    this.checkItemCollison(this.boss);
+  }
+
+
+  lostEnergy() {
+    this.character.hit();
+    this.healthBar.setPercentage(this.character.energy);
   }
 
 
@@ -108,19 +125,29 @@ class World {
   getSoundAndPrecent(item) {
     if (this.character.isColliding(item)) {
       this.character.getItem(item);
-      if (item instanceof bottle) {
-        audio.level_audio.collectBottle.play();
-      } else if (item instanceof coins) {
-        audio.level_audio.collectCoin.play();
-      }
-      this.coinBar.setPercentage(this.character.coinPrecent);
-      if (this.character.coinPrecent == 100) {
-        this.character.bottlePrecent += 20;
-        this.character.coinPrecent = 0;
-      }
-      this.bottleBar.setPercentage(this.character.bottlePrecent);
-      this.level.collectableItems.splice(this.level.collectableItems.indexOf(item), 1);
+      this.playCollectSound(item);
+      this.showStatus(item);
     }
+  }
+
+
+  playCollectSound(item) {
+    if (item instanceof bottle) {
+      audio.level_audio.collectBottle.play();
+    } else if (item instanceof coins) {
+      audio.level_audio.collectCoin.play();
+    }
+  }
+
+
+  showStatus(item) {
+    this.coinBar.setPercentage(this.character.coinPrecent);
+    if (this.character.coinPrecent == 100) {
+      this.character.bottlePrecent += 20;
+      this.character.coinPrecent = 0;
+    }
+    this.bottleBar.setPercentage(this.character.bottlePrecent);
+    this.level.collectableItems.splice(this.level.collectableItems.indexOf(item), 1);
   }
 
 
@@ -174,7 +201,6 @@ class World {
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
-    //mo.drawFrame(this.ctx);
 
     if (mo.otherDiretion) {
       this.flipImageBack(mo);
