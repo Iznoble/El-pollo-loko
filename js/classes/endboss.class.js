@@ -1,8 +1,8 @@
 class Endboss extends MovableObject {
 
-    height = 350;
-    width = 300;
-    y = 100;
+    height = 450;
+    width = 400;
+    y = 20;
     offset = {
         top: 40,
         bottom: 40,
@@ -10,7 +10,6 @@ class Endboss extends MovableObject {
         left: 20
     };
     world;
-
 
     IMAGES_INTRO = [
         "img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -54,7 +53,6 @@ class Endboss extends MovableObject {
     ];
 
 
-
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_INTRO);
@@ -67,7 +65,6 @@ class Endboss extends MovableObject {
         this.startIntro();
         this.animateEndboss();
     }
-
 
     /**
      * 
@@ -99,7 +96,7 @@ class Endboss extends MovableObject {
                 this.startWalking();
             }
             i++;
-        }, 150);
+        }, 100);
     }
 
     /**
@@ -129,7 +126,7 @@ class Endboss extends MovableObject {
                 audio.endboss_audio.bossHurt.play();
                 this.startAttacking();
             }
-        }, 200);
+        }, 180);
     }
 
     /**
@@ -139,7 +136,7 @@ class Endboss extends MovableObject {
     startAttacking() {
         setTimeout(() => {
             this.playAnimation(this.IMAGES_ATTACKING);
-            this.x -= 20;
+            this.x -= 70;
         }, 1800);
     }
 

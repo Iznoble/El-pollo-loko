@@ -7,7 +7,6 @@ class Throwable extends MovableObject {
         "img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png"
     ];
 
-
     BOTTLE_SPLASH = [
         "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
         "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
@@ -17,8 +16,6 @@ class Throwable extends MovableObject {
         "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
         ""
     ];
-
-
 
 
     constructor(x, y, world) {
@@ -66,6 +63,4 @@ class Throwable extends MovableObject {
             audio.level_audio.brokenBottle.play();
         }
     }
-
-
 }

@@ -1,5 +1,6 @@
 class Sounds {
     constructor() {
+      
       this.level_audio = {
         level1: new Audio('audio/level.mp3'),
         gameWon: new Audio('audio/level-win.mp3'),

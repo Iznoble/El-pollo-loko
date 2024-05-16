@@ -3,7 +3,6 @@ let world;
 let keyboard = new Keyboard();
 let audio = new Sounds();
 
-
 /**
  * 
  * loads the canvas before starting the game
@@ -12,7 +11,6 @@ function init() {
     canvas = document.getElementById('canvas');
     rotateNotification();
 }
-
 
 /**
  * 

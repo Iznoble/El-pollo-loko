@@ -13,8 +13,6 @@ class Character extends MovableObject {
     idleTime = 0;
     lastMoveTime = new Date().getTime();
 
-
-
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -55,7 +53,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-39.png',
     ];
 
-
     IMAGES_DEAD = [
         'img/2_character_pepe/5_dead/D-51.png',
         'img/2_character_pepe/5_dead/D-52.png',
@@ -65,7 +62,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-56.png',
         'img/2_character_pepe/5_dead/D-57.png'
     ];
-
 
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
@@ -83,17 +79,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_JUMP);
         this.applyGravity();
-        this.animate();
-    }
-
-
-    /**
-     * 
-     * Performs every moveset for the character
-     */
-    animate() {
         this.moveCharacter();
-        this.animateCharacter();
+        this.animateCharacter()
     }
 
     /**
@@ -126,12 +113,12 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isAboveGround()) {
                 this.playJumpAnimation();
+            } else if (this.isDead() && !this.deadSoundPlayed) {
+                this.playDeadAnimation();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playWalkingAnimation();
             } else if (this.isHurt()) {
                 this.playHurtAnimation();
-            } else if (this.isDead() && !this.deadSoundPlayed) {
-                this.playDeadAnimation();
             } else {
                 this.getSleppy();
             }
