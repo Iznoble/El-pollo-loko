@@ -34,20 +34,23 @@ class World {
   checkCollisions() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.healthBar.setPercentage(this.character.energy);
-        } else if (this.character.jumpOnEnemies(enemy)) {
+        if (this.character.isAboveGround() && this.character.isColliding(enemy)) {
           this.character.jump();
           enemy.hit();
           this.deleteEnemy(enemy);
+        } else if (this.character.isColliding(enemy)) {
+          this.character.hit();
+          this.healthBar.setPercentage(this.character.energy);
         } else if (this.character.isColliding(this.boss)) {
           this.character.hit();
           this.healthBar.setPercentage(this.character.energy);
-        } else {
-          this.checkItemCollison(enemy);
         }
+        this.checkItemCollison(enemy);
       });
+  
+      // Überprüfe auch die Kollisionen mit dem Boss
+      this.checkItemCollison(this.boss);
+  
       this.checkThrow();
     }, 100);
   }
@@ -59,28 +62,24 @@ class World {
       if (index > -1) {
         this.level.enemies.splice(index, 1);
       }
-    }, 1000);
+    }, 500);
   }
 
 
-  checkItemCollison(enemy) {
-    let itemCollision = false;
+  checkItemCollison(target) {
     this.throwableItem.forEach((item) => {
-      if (item.isColliding(enemy)) {
-        itemCollision = true;
-        enemy.hit();
-        this.throwableItem.splice(item, 1);
-      } else if (item.isColliding(this.boss)) {
-        itemCollision = true;
-        this.boss.hit();
-        this.throwableItem.splice(item, 1);
-        this.bossBar.setPercentage(this.boss.energy);
+      if (item.isColliding(target)) {
+        if (target instanceof Endboss) {
+          target.hit();
+          this.throwableItem.splice(item, 1);
+          this.bossBar.setPercentage(this.boss.energy);
+        } else {
+          target.hit();
+          this.throwableItem.splice(item, 1);
+          this.deleteEnemy(target);
+        }
       }
     });
-
-    if (enemy.energy < 5 && itemCollision) {
-      this.deleteEnemy(enemy);
-    }
   }
 
 

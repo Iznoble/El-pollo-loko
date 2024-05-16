@@ -1,10 +1,11 @@
 @font-face {
     font-family: 'zabras';
-    src: url('./fonts/zabars.ttf') format('truetype');
+    src: url('fonts/zabars.ttf') format('truetype');
 }
 
 
 body {
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -17,7 +18,6 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: 'zabras', Arial, Helvetica, sans-serif;
 }
 
 .d-none {

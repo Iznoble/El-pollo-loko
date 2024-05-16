@@ -55,14 +55,6 @@ class MovableObject extends drawableObject {
     }
 
 
-    jumpOnEnemies(enemy) {
-        return this.x + this.width > enemy.x &&
-            this.x < enemy.x + enemy.width &&
-            this.y + this.height >= enemy.y &&
-            this.y + this.height <= enemy.y + enemy.height;
-    }
-
-
     hit() {
         this.energy -= 10;
         if (this.energy < 0) {

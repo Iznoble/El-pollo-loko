@@ -94,14 +94,12 @@ class Endboss extends MovableObject {
 
     startWalking() {
         const attack = setInterval(() => {
-                this.startAttacking();
-        }, 1000);
+            this.startAttacking();
+            this.x -= 10;
+        }, 300);
 
         setInterval(() => {
-            if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                audio.endboss_audio.bossHurt.play();
-            } else if (this.isDead()) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.currentImage = 2;
                 clearInterval(attack);
@@ -109,20 +107,22 @@ class Endboss extends MovableObject {
                 audio.endboss_audio.bossDeath.play();
                 setTimeout(() => {
                     gameWonScreen();
-                }, 1500);
+                }, 1000);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+                audio.endboss_audio.bossHurt.play();
             } else {
                 this.moveLeft();
                 this.otherDiretion = false;
                 this.playAnimation(this.IMAGES_WALKING);
             }
-        }, 200);
+        }, 250);
 
     }
 
     startAttacking() {
         setTimeout(() => {
             this.playAnimation(this.IMAGES_ATTACKING);
-            this.x -= 20;
-        }, 1000/ 60);
+        }, 3000);
     }
 }
